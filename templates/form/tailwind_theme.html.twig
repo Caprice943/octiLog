@@ -1,0 +1,68 @@
+{% use 'form_div_layout.html.twig' %}
+
+{% block form_row %}
+    <div class="mb-5">
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{- form_help(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{% endblock form_row %}
+
+{% block form_label %}
+    {%- if label is not same as(false) -%}
+        <label {% if label_attr %}{% with { attr: label_attr } %}{{ block('attributes') }}{% endwith %}{% endif %} class="block text-sm font-medium text-slate-700 mb-1.5">
+            {{- label is not same as(false) and label is empty ? name|humanize|trans({}, translation_domain) : label|trans({}, translation_domain) -}}
+        </label>
+    {%- endif -%}
+{% endblock form_label %}
+
+{% block form_help %}
+    {%- if help is not empty -%}
+        <p class="mt-1 text-sm text-slate-500">{{ help|trans({}, translation_domain) }}</p>
+    {%- endif -%}
+{% endblock form_help %}
+
+{% block form_errors %}
+    {%- if errors|length > 0 -%}
+        <ul class="mt-1.5 space-y-1">
+            {%- for error in errors -%}
+                <li class="text-sm text-red-600">{{ error.message }}</li>
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+{% endblock form_errors %}
+
+{% block form_widget_simple %}
+    {%- set attr = attr|merge({class: (attr.class|default('') ~ ' block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-teal-500 focus:ring-2 focus:ring-teal-500/30 focus:outline-none')|trim}) -%}
+    {{- parent() -}}
+{% endblock form_widget_simple %}
+
+{% block textarea_widget %}
+    {%- set attr = attr|merge({class: (attr.class|default('') ~ ' block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-teal-500 focus:ring-2 focus:ring-teal-500/30 focus:outline-none')|trim}) -%}
+    {{- parent() -}}
+{% endblock textarea_widget %}
+
+{% block choice_widget_collapsed %}
+    {%- set attr = attr|merge({class: (attr.class|default('') ~ ' block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-teal-500 focus:ring-2 focus:ring-teal-500/30 focus:outline-none')|trim}) -%}
+    {{- parent() -}}
+{% endblock choice_widget_collapsed %}
+
+{% block file_widget %}
+    {%- set type = type|default('file') -%}
+    {%- set attr = attr|merge({class: (attr.class|default('') ~ ' block w-full text-sm text-slate-600 file:mr-4 file:rounded-lg file:border-0 file:bg-teal-50 file:px-4 file:py-2 file:text-sm file:font-medium file:text-teal-700 hover:file:bg-teal-100')|trim}) -%}
+    <input type="{{ type }}" {{ block('widget_attributes') }}/>
+{% endblock file_widget %}
+
+{% block checkbox_row %}
+    <div class="mb-5 flex items-center gap-2">
+        {{- form_widget(form) -}}
+        {{- form_label(form, null, { label_attr: { class: 'text-sm text-slate-700' } }) -}}
+        {{- form_errors(form) -}}
+    </div>
+{% endblock checkbox_row %}
+
+{% block checkbox_widget %}
+    {%- set attr = attr|merge({class: (attr.class|default('') ~ ' h-4 w-4 rounded border-slate-300 text-teal-600 focus:ring-teal-500')|trim}) -%}
+    {{- parent() -}}
+{% endblock checkbox_widget %}

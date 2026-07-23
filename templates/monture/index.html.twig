@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Montures{% endblock %}
+
+{% block body %}
+    <div class="mb-8 flex items-center justify-between">
+        <h1 class="text-2xl font-semibold text-slate-900">Nos montures</h1>
+        <span class="text-sm text-slate-500">{{ montures|length }} monture{{ montures|length > 1 ? 's' : '' }}</span>
+    </div>
+
+    {% if montures|length == 0 %}
+        <div class="rounded-xl border border-dashed border-slate-300 bg-white px-6 py-16 text-center">
+            <p class="text-slate-500">Aucune monture pour le moment.</p>
+            <a href="{{ path('app_monture_new') }}" class="mt-4 inline-block rounded-lg bg-teal-600 px-4 py-2 text-sm font-medium text-white hover:bg-teal-700">
+                Ajouter la première monture
+            </a>
+        </div>
+    {% else %}
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {% for monture in montures %}
+                <div class="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md">
+                    <a href="{{ path('app_monture_show', {'id': monture.id}) }}" class="block aspect-square overflow-hidden bg-slate-100">
+                        {% if monture.photo %}
+                            <img src="{{ vich_uploader_asset(monture, 'imageFile') }}" alt="Monture #{{ monture.id }}" class="h-full w-full object-cover transition group-hover:scale-105">
+                        {% else %}
+                            <div class="flex h-full w-full items-center justify-center text-slate-300">
+                                <span class="text-sm">Pas de photo</span>
+                            </div>
+                        {% endif %}
+                    </a>
+                    <div class="p-4">
+                        <div class="mb-2 flex items-center gap-2">
+                            <span class="rounded-full bg-teal-50 px-2.5 py-0.5 text-xs font-medium text-teal-700">{{ monture.genre.value|capitalize }}</span>
+                            <span class="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-600">{{ monture.categorie.value|capitalize }}</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-semibold text-slate-900">{{ monture.prix|number_format(2, ',', ' ') }} €</span>
+                            <span class="text-sm text-slate-500">Stock : {{ monture.stock }}</span>
+                        </div>
+                        <div class="mt-4 flex items-center gap-3 text-sm">
+                            <a href="{{ path('app_monture_show', {'id': monture.id}) }}" class="font-medium text-teal-600 hover:text-teal-700">Voir</a>
+                            <a href="{{ path('app_monture_edit', {'id': monture.id}) }}" class="font-medium text-slate-500 hover:text-slate-700">Modifier</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,9 @@
+vich_uploader:
+    db_driver: orm
+    mappings:
+        monture_photo:
+            uri_prefix: /uploads/montures
+            upload_destination: '%kernel.project_dir%/public/uploads/montures'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: true
+            delete_on_remove: true

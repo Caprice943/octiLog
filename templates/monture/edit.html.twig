@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier la monture{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_monture_index') }}" class="mb-6 inline-block text-sm font-medium text-slate-500 hover:text-slate-700">&larr; Retour à la liste</a>
+
+    <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div class="mb-6 flex items-center justify-between">
+            <h1 class="text-xl font-semibold text-slate-900">Modifier la monture</h1>
+            {{ include('monture/_delete_form.html.twig') }}
+        </div>
+
+        {{ include('monture/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+    </div>
+{% endblock %}

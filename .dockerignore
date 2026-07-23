@@ -1,0 +1,11 @@
+.git
+.gitignore
+var/
+vendor/
+node_modules/
+public/uploads/
+.env.local
+.env.*.local
+docker
+compose*.yaml
+Dockerfile

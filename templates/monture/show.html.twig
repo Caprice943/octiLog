@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Monture #{{ monture.id }}{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_monture_index') }}" class="mb-6 inline-block text-sm font-medium text-slate-500 hover:text-slate-700">&larr; Retour à la liste</a>
+
+    <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm sm:flex">
+        <div class="aspect-square bg-slate-100 sm:w-80 sm:flex-none">
+            {% if monture.photo %}
+                <img src="{{ vich_uploader_asset(monture, 'imageFile') }}" alt="Monture #{{ monture.id }}" class="h-full w-full object-cover">
+            {% else %}
+                <div class="flex h-full w-full items-center justify-center text-slate-300">
+                    <span class="text-sm">Pas de photo</span>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="flex-1 p-6">
+            <div class="mb-3 flex items-center gap-2">
+                <span class="rounded-full bg-teal-50 px-2.5 py-0.5 text-xs font-medium text-teal-700">{{ monture.genre.value|capitalize }}</span>
+                <span class="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-600">{{ monture.categorie.value|capitalize }}</span>
+            </div>
+
+            <p class="text-3xl font-semibold text-slate-900">{{ monture.prix|number_format(2, ',', ' ') }} €</p>
+            <p class="mt-1 text-sm text-slate-500">Stock disponible : {{ monture.stock }}</p>
+
+            {% if monture.updatedAt %}
+                <p class="mt-4 text-xs text-slate-400">Dernière mise à jour : {{ monture.updatedAt|date('d/m/Y H:i') }}</p>
+            {% endif %}
+
+            <div class="mt-6 flex items-center gap-3">
+                <a href="{{ path('app_monture_edit', {'id': monture.id}) }}" class="rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">
+                    Modifier
+                </a>
+                {{ include('monture/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

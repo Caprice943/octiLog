@@ -18,7 +18,20 @@
         <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
         {% endif %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body class="min-h-screen bg-slate-50 text-slate-900">
+        <header class="border-b border-slate-200 bg-white">
+            <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+                <a href="{{ path('homepage') }}" class="text-lg font-semibold tracking-tight text-slate-900">
+                    octi<span class="text-teal-600">Log</span>
+                </a>
+                <a href="{{ path('app_monture_new') }}" class="rounded-lg bg-teal-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-teal-700">
+                    + Ajouter une monture
+                </a>
+            </div>
+        </header>
+
+        <main class="mx-auto max-w-5xl px-6 py-10">
+            {% block body %}{% endblock %}
+        </main>
     </body>
 </html>
