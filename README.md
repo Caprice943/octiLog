@@ -1,4 +1,4 @@
-# OctiLog — Catalogue de montures
+# OctiLog -- Catalogue de montures
  
 Mini-projet Symfony développé pour monter en compétences sur le stack PHP/Symfony, en amont d'une candidature (secteur optique). L'application permet de gérer un catalogue de montures (CRUD complet) via une interface web et une API REST.
  
@@ -81,7 +81,7 @@ Les fichiers `.env` et `.env.local` contenant les secrets réels ne sont pas ver
 
 ## 👩‍💻 Auteur
  
-**Caprice** — Développeuse fullstack (Angular / Spring Boot)
+**Caprice** -- Développeuse fullstack (Angular / Spring Boot)
 Portfolio : [caprice-m.dev](https://caprice-m.dev)
  
 Projet réalisé dans le cadre d'une démarche d'apprentissage ciblée sur le stack PHP/Symfony.
